@@ -79,7 +79,7 @@ window.setupMap = function(id) {
       map: map,
       query: {
         select: "geometry",
-        from: "1sIbB8gbr9mVXR3aUGjWcUMsNR8zLXfXlAwd6y_ZF",
+        from: "191jr9SrmjNE9QOI2--whtS4h3-VXza6ORk-QIj-K",
         where: "state = '" + state + "'"
       },
       styles: [{
@@ -101,15 +101,7 @@ window.setupMap = function(id) {
   }
 
   var onClick = function(e) {
-    e.infoWindowHtml =
-    e.row.winner.value +
-    "<ul>" +
-    "  <li>Votes for Donald Trump: "    + e.row.donald.value + "</li>" +
-    "  <li>Votes for Hillary Clinton: " + e.row.hillary.value + "</li>" +
-    "  <li>Votes for Gary Johnson: "    + e.row.johnson.value + "</li>" +
-    "  <li>Votes for Jill Stein: "      + e.row.stein.value + "</li>" +
-    "  <li>Votes for Evan McMullin: "   + e.row.mcmullin.value + "</li>"
-    "</ul>"
+    e.infoWindowHtml = "Hello world!"
   }
 
   google.maps.event.addListener(map, 'dragend', reorient)
