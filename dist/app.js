@@ -40,16 +40,24 @@ window.setupMap = function(id) {
       if (counties) { google.maps.event.addListener(counties, 'click', onClick) }
       states = getStateLayer(map, window.currentState)
       if (states) { google.maps.event.addListener(states, 'click', onClick) }
+
     })
+    if (window.currentState) {
+      onClick({ row: window.stateData[window.currentState] })
+    }
   }
 
   var onClick = function(e) {
     var title
+    if (map.getZoom() <= 5) {
+      document.getElementById('resultLink').style.display = 'inline-block';
+    } else {
+      document.getElementById('resultLink').style.display = 'none';
+    }
+
     if (e.row.county) {
-      document.getElementById('resultLink').style.display = 'none'
       title = e.row.county.value + " County (" + e.row.state.value + ")"
     } else {
-      document.getElementById('resultLink').style.display = 'inline-block'
       title = e.row.state_name.value
     }
     document.getElementById('resultTitle').innerHTML = title
@@ -57,15 +65,15 @@ window.setupMap = function(id) {
     var cands = ['hillary', 'donald', 'johnson', 'stein', 'mcmullin']
     for (i = 0; i < cands.length; i++) {
       var pct = (parseFloat(e.row[cands[i] + '_pct'].value) * 100).toFixed(1) + '%'
-      document.getElementById(cands[i] + '_total').innerHTML = e.row[cands[i]].value
+      var total = parseInt(e.row[cands[i]].value) || null
+      document.getElementById(cands[i] + '_total').innerHTML = total
       document.getElementById(cands[i] + '_pct').innerHTML = pct
       document.getElementById(cands[i] + '_slider').style.width = pct
     }
   }
 
-  var getStateLayer = function(map, state) {
+  var getStateLayer = function(map) {
     var styles
-    var whereClause
     if (map.getZoom() > 5) { return false }
     return new google.maps.FusionTablesLayer({
       map: map,
@@ -121,12 +129,12 @@ window.setupMap = function(id) {
       case 115: direction = 'down';  break;
       case 97:  direction = 'left';  break;
     }
-    var goToState = window.stateData[window.currentState][direction]
+    var goToState = window.stateData[window.currentState][direction].value
     if (!!goToState) {
       window.currentState = goToState
       map.setCenter({
-        lat: window.stateData[goToState].latitude,
-        lng: window.stateData[goToState].longitude
+        lat: window.stateData[goToState].latitude.value,
+        lng: window.stateData[goToState].longitude.value
       })
       google.maps.event.trigger(map, 'dragend')
     }
@@ -149,7 +157,7 @@ setData = function(data) {
   for (i = 0; i < data.rows.length; i++) {
     obj = {}
     for (j = 1; j < data.columns.length; j++) {
-      obj[data.columns[j]] = data.rows[i][j]
+      obj[data.columns[j]] = { name: data.columns[j], value: data.rows[i][j] }
     }
     window.stateData[data.rows[i][0]] = obj
   }

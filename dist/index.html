@@ -9,7 +9,7 @@
     <div id="stateResult">
       <div id="modal-content">
         <div id="resultTitleWrapper">
-          <h1 id="resultTitle">(Click on a state or county to begin)</h1>
+          <h1 id="resultTitle">(Click on a state or zoom to begin)</h1>
           <a onclick="viewState()" id="resultLink" href="#">(View counties)</a>
         </div>
 
@@ -91,6 +91,6 @@
       </div>
     </div>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBLwybRzVpOL2Kj8K5mm4BaZZpc8VuMJ18&callback=init"></script>
-    <script async defer src="https://www.googleapis.com/fusiontables/v1/query?key=AIzaSyBLwybRzVpOL2Kj8K5mm4BaZZpc8VuMJ18&sql=select+state%2C+up%2C+right%2C+down%2C+%27left%27%2C+latitude%2C+longitude+from+1ZxWCBztPbuJqOFulc7OK0k04ycvsEdesLM08zyI5&callback=setData"></script>
+    <script async defer src="https://www.googleapis.com/fusiontables/v1/query?key=AIzaSyBLwybRzVpOL2Kj8K5mm4BaZZpc8VuMJ18&sql=select+%2A+from+1ZxWCBztPbuJqOFulc7OK0k04ycvsEdesLM08zyI5&callback=setData"></script>
   </body>
 </html>
