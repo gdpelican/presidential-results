@@ -1,0 +1,71 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+#states {
+  width: 100%;
+  height: 100%;
+  margin: auto;
+}
+
+#hawaii {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 200px;
+  height: 200px;
+  box-shadow: 0 0 5px black;
+}
+
+#alaska {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 200px;
+  height: 200px;
+  box-shadow: 0 0 5px black;
+}
+
+#modal {
+  display: none;
+  position: absolute;
+  top: 40px;
+  left: 40px;
+  bottom: 40px;
+  right: 40px;
+  background: white;
+  box-shadow: 0 0 5px black;
+}
+
+.gmnoprint:not(.gm-bundled-control) { display: none; }
+.gm-bundled-control .gmnoprint { display: block; }
+a[href^="http://maps.google.com/maps"]{display:none !important}
+a[href^="https://maps.google.com/maps"]{display:none !important}
+a[href^="https://www.google.com/maps"]{display:none !important}
+
+.close {
+  position: absolute;
+  right: 32px;
+  top: 32px;
+  width: 32px;
+  height: 32px;
+  opacity: 0.3;
+}
+.close:hover {
+  opacity: 1;
+}
+.close:before, .close:after {
+  position: absolute;
+  left: 15px;
+  content: ' ';
+  height: 33px;
+  width: 2px;
+  background-color: #333;
+}
+.close:before {
+  transform: rotate(45deg);
+}
+.close:after {
+  transform: rotate(-45deg);
+}

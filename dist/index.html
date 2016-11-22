@@ -1,0 +1,16 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="app.css" />
+    <script type="text/javascript" src="app.js"></script>
+  </head>
+  <body>
+    <div id="states"></div>
+    <div id="modal">
+      <a href="#" class="close"></a>
+      <div id="modal-content">
+      </div>
+    </div>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBLwybRzVpOL2Kj8K5mm4BaZZpc8VuMJ18&callback=init"></script>
+    <script async defer src="https://www.googleapis.com/fusiontables/v1/query?key=AIzaSyBLwybRzVpOL2Kj8K5mm4BaZZpc8VuMJ18&sql=select+state%2C+up%2C+right%2C+down%2C+%27left%27%2C+latitude%2C+longitude+from+1ZxWCBztPbuJqOFulc7OK0k04ycvsEdesLM08zyI5&callback=setData"></script>
+  </body>
+</html>
