@@ -3,7 +3,7 @@ window.setupMap = function(id) {
   var map = new google.maps.Map(document.getElementById(id), {
     styles: [
       {featureType: "all",                     elementType: "labels", stylers: [{visibility: "off" }]},
-      {featureType: "administrative.country",  elementType: "all",    stylers: [{visibility: "off" }]},
+      {featureType: "administrative.country",  elementType: "all",    stylers: [{color: "#BCBCBC" }]},
       {featureType: "administrative.province", elementType: "all",    stylers: [{visibility: "on" }]},
       {featureType: "road",                    elementType: "all",    stylers: [{visibility: "off" }]},
       {featureType: "transit",                 elementType: "all",    stylers: [{visibility: "off" }]},
