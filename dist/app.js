@@ -11,7 +11,7 @@ window.setupMap = function(id) {
       {featureType: "landscape",               elementType: "all",    stylers: [{color:      "#CBCBCB" }]},
       {featureType: "poi",                     elementType: "all",    stylers: [{color:      "#CBCBCB" }]},
     ],
-    zoom: 6,
+    zoom: 4,
     draggable: true,
     center: { lat: 39.82, lng: -98.57 },
     disableDefaultUI: true,
@@ -63,7 +63,7 @@ window.setupMap = function(id) {
     var states = new google.maps.FusionTablesLayer({
       map: map,
       query: {
-        select: "state, donald, hillary, johnson, stein, mcmullin, total, winner",
+        select: "geo",
         from: "1ZxWCBztPbuJqOFulc7OK0k04ycvsEdesLM08zyI5",
         where: whereClause
       },
@@ -78,12 +78,18 @@ window.setupMap = function(id) {
     counties = new google.maps.FusionTablesLayer({
       map: map,
       query: {
-        select: "geometry, state, fips, county, donald, hillary, johnson, stein, mcmullin",
+        select: "geometry",
         from: "1sIbB8gbr9mVXR3aUGjWcUMsNR8zLXfXlAwd6y_ZF",
         where: "state = '" + state + "'"
       },
       styles: [{
-        where: "state = '" + state + "'",
+        where: "winner = 'hillary'",
+        polygonOptions: {
+          fillColor: "#0000ff",
+          fillOpacity: 0.3
+        }
+      }, {
+        where: "winner = 'donald'",
         polygonOptions: {
           fillColor: "#ff0000",
           fillOpacity: 0.3
