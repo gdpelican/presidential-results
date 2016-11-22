@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Ubuntu');
+
 body {
   margin: 0;
   padding: 0;
@@ -9,33 +11,32 @@ body {
   margin: auto;
 }
 
-#hawaii {
+#stateResult {
+  cursor: move;
   position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 200px;
-  height: 200px;
-  box-shadow: 0 0 5px black;
+  top: calc(100vh - 300px);
+  left: 10px;
+  width: 325px;
+  padding: 10px;
+  border-radius: 4px;
+  background: #efefef;
+  box-shadow: 1px 1px 5px #444;
+  font-family: Ubuntu, sans-serif;
 }
 
-#alaska {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 200px;
-  height: 200px;
-  box-shadow: 0 0 5px black;
+#resultTitle {
+  font-size: 18px;
+  margin: 10px;
+  display: inline-block;
 }
 
-#modal {
+#resultLink {
   display: none;
-  position: absolute;
-  top: 40px;
-  left: 40px;
-  bottom: 40px;
-  right: 40px;
-  background: white;
-  box-shadow: 0 0 5px black;
+  vertical-align: top;
+  text-decoration: none;
+  color: #333399;
+  font-size: 13px;
+  padding-top: 16px;
 }
 
 .gmnoprint:not(.gm-bundled-control) { display: none; }
@@ -44,28 +45,56 @@ a[href^="http://maps.google.com/maps"]{display:none !important}
 a[href^="https://maps.google.com/maps"]{display:none !important}
 a[href^="https://www.google.com/maps"]{display:none !important}
 
-.close {
-  position: absolute;
-  right: 32px;
-  top: 32px;
-  width: 32px;
-  height: 32px;
-  opacity: 0.3;
+.vote-result img {
+  width: 35px;
+  height: 35px;
+  border-radius: 100%;
 }
-.close:hover {
-  opacity: 1;
+
+.vote-name {
+  padding: 4px 0;
 }
-.close:before, .close:after {
-  position: absolute;
-  left: 15px;
-  content: ' ';
-  height: 33px;
-  width: 2px;
-  background-color: #333;
+
+.vote-block {
+  display: inline-block;
+  padding: 5px;
 }
-.close:before {
-  transform: rotate(45deg);
+
+.vote-slider {
+  vertical-align: top;
+  padding: 5px;
 }
-.close:after {
-  transform: rotate(-45deg);
+
+.vote-slider-background {
+  width: 200px;
+  background: #aaa;
+  height: 4px;
+}
+
+.vote-slider-foreground {
+  width: 100%;
+  height: 4px;
+  position: relative;
+  bottom: 4px;
+  transition: 0.5s ease-in-out all;
+}
+
+.donald   .vote-slider-foreground { background: #c66; }
+.clinton  .vote-slider-foreground { background: #66c; }
+.johnson  .vote-slider-foreground { background: #cc6; }
+.stein    .vote-slider-foreground { background: #6c6; }
+.mcmullin .vote-slider-foreground { background: #c6c; }
+
+.vote-counts {
+  text-align: center;
+}
+
+.vote-percent {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.vote-total {
+  font-size: 11px;
+  font-style: italic;
 }

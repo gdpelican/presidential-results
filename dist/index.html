@@ -1,13 +1,93 @@
 <html>
   <head>
     <link rel="stylesheet" href="app.css" />
+    <script type="text/javascript" src="draggable.js"></script>
     <script type="text/javascript" src="app.js"></script>
   </head>
-  <body>
+  <body id="body">
     <div id="states"></div>
-    <div id="modal">
-      <a href="#" class="close"></a>
+    <div id="stateResult">
       <div id="modal-content">
+        <div id="resultTitleWrapper">
+          <h1 id="resultTitle">(Click on a state or county to begin)</h1>
+          <a onclick="viewState()" id="resultLink" href="#">(View counties)</a>
+        </div>
+
+        <div class="vote-result donald">
+          <div class="vote-block vote-avatar">
+            <img src="img/trump.png" alt="Donald Trump" />
+          </div>
+          <div class="vote-block vote-slider">
+            <div class="vote-name">Donald Trump</div>
+            <div class="vote-slider-background"></div>
+            <div id="donald_slider" class="vote-slider-foreground"></div>
+          </div>
+          <div class="vote-block vote-counts">
+            <div id="donald_pct" class="vote-percent"></div>
+            <div id="donald_total" class="vote-total"></div>
+          </div>
+        </div>
+
+        <div class="vote-result clinton">
+          <div class="vote-block vote-avatar">
+            <img src="img/clinton.jpg" alt="Hillary Clinton" />
+          </div>
+          <div class="vote-block vote-slider">
+            <div class="vote-name">Hillary Clinton</div>
+            <div class="vote-slider-background"></div>
+            <div id="hillary_slider" class="vote-slider-foreground"></div>
+          </div>
+          <div class="vote-block vote-counts">
+            <div id="hillary_pct" class="vote-percent"></div>
+            <div id="hillary_total" class="vote-total"></div>
+          </div>
+        </div>
+
+        <div class="vote-result johnson">
+          <div class="vote-block vote-avatar">
+            <img src="img/johnson.jpg" alt="Gary Johnson" />
+          </div>
+          <div class="vote-block vote-slider">
+            <div class="vote-name">Gary Johnson</div>
+            <div class="vote-slider-background"></div>
+            <div id="johnson_slider" class="vote-slider-foreground"></div>
+          </div>
+          <div class="vote-block vote-counts">
+            <div id="johnson_pct" class="vote-percent"></div>
+            <div id="johnson_total" class="vote-total"></div>
+          </div>
+        </div>
+
+        <div class="vote-result stein">
+          <div class="vote-block vote-avatar">
+            <img src="img/stein.jpg" alt="Jill Stein" />
+          </div>
+          <div class="vote-block vote-slider">
+            <div class="vote-name">Jill Stein</div>
+            <div class="vote-slider-background"></div>
+            <div id="stein_slider" class="vote-slider-foreground"></div>
+          </div>
+          <div class="vote-block vote-counts">
+            <div id="stein_pct" class="vote-percent"></div>
+            <div id="stein_total" class="vote-total"></div>
+          </div>
+        </div>
+
+        <div class="vote-result mcmullin">
+          <div class="vote-block vote-avatar">
+            <img src="img/mcmullin.jpg" alt="Evan McMullin" />
+          </div>
+          <div class="vote-block vote-slider">
+            <div class="vote-name">Evan McMullin</div>
+            <div class="vote-slider-background"></div>
+            <div id="mcmullin_slider" class="vote-slider-foreground"></div>
+          </div>
+          <div class="vote-block vote-counts">
+            <div id="mcmullin_pct" class="vote-percent"></div>
+            <div id="mcmullin_total" class="vote-total"></div>
+          </div>
+        </div>
+
       </div>
     </div>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBLwybRzVpOL2Kj8K5mm4BaZZpc8VuMJ18&callback=init"></script>

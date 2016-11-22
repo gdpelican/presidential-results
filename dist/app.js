@@ -3,7 +3,7 @@ window.setupMap = function(id) {
   var map = new google.maps.Map(document.getElementById(id), {
     styles: [
       {featureType: "all",                     elementType: "labels", stylers: [{visibility: "off" }]},
-      {featureType: "administrative.country",  elementType: "all",    stylers: [{color: "#666666"}]},
+      {featureType: "administrative.country",  elementType: "all",    stylers: [{visibility: "off" }]},
       {featureType: "administrative.province", elementType: "all",    stylers: [{visibility: "on" }]},
       {featureType: "road",                    elementType: "all",    stylers: [{visibility: "off" }]},
       {featureType: "transit",                 elementType: "all",    stylers: [{visibility: "off" }]},
@@ -37,8 +37,30 @@ window.setupMap = function(id) {
       if (!!states)   { states.setMap(null) }
       if (!!counties) { counties.setMap(null) }
       counties = getCountyLayer(map, window.currentState)
+      if (counties) { google.maps.event.addListener(counties, 'click', onClick) }
       states = getStateLayer(map, window.currentState)
+      if (states) { google.maps.event.addListener(states, 'click', onClick) }
     })
+  }
+
+  var onClick = function(e) {
+    var title
+    if (e.row.county) {
+      document.getElementById('resultLink').style.display = 'none'
+      title = e.row.county.value + " County (" + e.row.state.value + ")"
+    } else {
+      document.getElementById('resultLink').style.display = 'inline-block'
+      title = e.row.state_name.value
+    }
+    document.getElementById('resultTitle').innerHTML = title
+    document.getElementById('resultTitle').style['font-size'] = '20px'
+    var cands = ['hillary', 'donald', 'johnson', 'stein', 'mcmullin']
+    for (i = 0; i < cands.length; i++) {
+      var pct = (parseFloat(e.row[cands[i] + '_pct'].value) * 100).toFixed(1) + '%'
+      document.getElementById(cands[i] + '_total').innerHTML = e.row[cands[i]].value
+      document.getElementById(cands[i] + '_pct').innerHTML = pct
+      document.getElementById(cands[i] + '_slider').style.width = pct
+    }
   }
 
   var getStateLayer = function(map, state) {
@@ -116,6 +138,9 @@ window.setupMap = function(id) {
 
 init = function() {
   window.setupMap('states')
+  results = document.getElementById('stateResult')
+  results.addEventListener('mousedown', function(e) { window.draggable.start(this, 'body', e) })
+  results.addEventListener('mouseup', function(e) { window.draggable.stop('body') })
 }
 
 setData = function(data) {
