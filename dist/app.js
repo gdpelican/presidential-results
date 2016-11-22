@@ -51,8 +51,10 @@ window.setupMap = function(id) {
     var title
     if (map.getZoom() <= 5) {
       document.getElementById('resultLink').style.display = 'inline-block';
+      document.getElementById('navHelp').style.display = 'none';
     } else {
       document.getElementById('resultLink').style.display = 'none';
+      document.getElementById('navHelp').style.display = 'block';
     }
 
     if (e.row.county) {
@@ -70,6 +72,8 @@ window.setupMap = function(id) {
       document.getElementById(cands[i] + '_pct').innerHTML = pct
       document.getElementById(cands[i] + '_slider').style.width = pct
     }
+
+    if (e.row.state) { window.currentState = e.row.state.value }
   }
 
   var getStateLayer = function(map) {
@@ -145,10 +149,17 @@ window.setupMap = function(id) {
 }
 
 init = function() {
-  window.setupMap('states')
+  map = window.setupMap('states')
   results = document.getElementById('stateResult')
   results.addEventListener('mousedown', function(e) { window.draggable.start(this, 'body', e) })
   results.addEventListener('mouseup', function(e) { window.draggable.stop('body') })
+  document.getElementById('resultLink').addEventListener('click', function() {
+    map.setCenter({
+      lat: window.stateData[window.currentState].latitude.value,
+      lng: window.stateData[window.currentState].longitude.value
+    })
+    map.setZoom(6)
+  })
 }
 
 setData = function(data) {
