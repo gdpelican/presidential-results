@@ -44,39 +44,29 @@ window.setupMap = function(id) {
   var getStateLayer = function(map, state) {
     var styles
     var whereClause
-    if (map.getZoom() <= 5) {
-      styles = [{
+    if (map.getZoom() > 5) { return false }
+    return new google.maps.FusionTablesLayer({
+      map: map,
+      suppressInfoWindows: true,
+      query: {
+        select: "geo",
+        from: "1ZxWCBztPbuJqOFulc7OK0k04ycvsEdesLM08zyI5",
+      },
+      styles: [{
         where: "winner = 'donald'",
         polygonOptions: { fillColor: "#ff0000", fillOpacity: 0.3 }
       }, {
         where: "winner = 'hillary'",
         polygonOptions: { fillColor: "#0000ff", fillOpacity: 0.3 }
-      }]
-    } else {
-      whereClause = state != null ? "state NOT EQUAL TO '" + state + "'" : null
-      styles = [{
-        where: whereClause,
-        polygonOptions: { fillColor: "#00ff00", fillOpacity: 0.0001 }
-      }]
-    }
-
-    var states = new google.maps.FusionTablesLayer({
-      map: map,
-      query: {
-        select: "geo",
-        from: "1ZxWCBztPbuJqOFulc7OK0k04ycvsEdesLM08zyI5",
-        where: whereClause
-      },
-      styles: styles,
+      }],
     })
-    google.maps.event.addListener(states, 'click', onClick)
-    return states
   }
 
   var getCountyLayer = function(map, state) {
     if (map.getZoom() <= 5) { return false }
-    counties = new google.maps.FusionTablesLayer({
+    return new google.maps.FusionTablesLayer({
       map: map,
+      suppressInfoWindows: true,
       query: {
         select: "geometry",
         from: "191jr9SrmjNE9QOI2--whtS4h3-VXza6ORk-QIj-K",
@@ -96,12 +86,6 @@ window.setupMap = function(id) {
         }
       }]
     })
-    google.maps.event.addListener(counties, 'click', onClick)
-    return counties
-  }
-
-  var onClick = function(e) {
-    e.infoWindowHtml = "Hello world!"
   }
 
   google.maps.event.addListener(map, 'dragend', reorient)
@@ -135,6 +119,7 @@ init = function() {
 }
 
 setData = function(data) {
+  if (data.error) { console.log(data.error); return false; }
   window.stateData = {}
   for (i = 0; i < data.rows.length; i++) {
     obj = {}
